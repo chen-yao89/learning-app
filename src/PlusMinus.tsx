@@ -19,10 +19,10 @@ import {
 } from '@chakra-ui/react';
 import { Icon } from '@chakra-ui/icons';
 import {
-  savePlusMinusQuestions,
-  getExistingQuestions,
-  updatePlusMinusQuestions,
-} from '../apiClient';
+  useSaveNewQuestions,
+  useGetQuestions,
+  useUpdateQuestions,
+} from './services/plusMinusQuery';
 import { useSearchParams } from 'react-router-dom';
 import { useCallback } from 'react';
 
@@ -33,7 +33,7 @@ type StateType =
     }
   | Record<string, never>;
 
-type QuestionType = {
+export type QuestionType = {
   index: number;
   question: string;
   answer: number;
@@ -151,20 +151,22 @@ const PlusMinus = () => {
     if (!questionId) {
       return;
     }
-    getExistingQuestions(questionId).then((res: { questions: QuestionType[] }) =>
-      dispatch({
-        type: ACTION.GetExistingQuestion,
-        payload: {
-          questionsArray: res.questions || [],
-        },
-      })
-    );
+    useGetQuestions(questionId)
+      .then((questions) =>
+        dispatch({
+          type: ACTION.GetExistingQuestion,
+          payload: {
+            questionsArray: questions || null,
+          },
+        })
+      )
+      .catch((error) => console.log(error));
   }, []);
 
   const inputChangeHandler = (event: { target: { id: number; value: string } }) => {
     const index = event.target.id;
     const userInput = event.target.value;
-    document.getElementById(index).value = userInput;
+    // document.getElementById(index). = userInput;
     dispatch({
       type: ACTION.RecordAnswer,
       payload: {
@@ -183,15 +185,18 @@ const PlusMinus = () => {
 
   const saveQuestionsHandler = useCallback(
     (questionId: string | null) => {
+      const data = state.questionsArray;
+      const correctAnswer = state.allCorrect
+        ? 10
+        : data.filter((q) => String(q.answer) === q.userInput).length;
       setQuestionSaved(true);
       if (questionId === null) {
-        savePlusMinusQuestions(state).then(
-          (res: { date: { replaceAll: (arg0: string, arg1: string) => any } }) =>
-            setParams({ questionId: `${res.date.replaceAll('"', '')}` })
+        useSaveNewQuestions(state.questionsArray, `${correctAnswer} / ${data.length}`).then((id) =>
+          setParams({ questionId: id })
         );
       }
       if (questionId !== null) {
-        updatePlusMinusQuestions(state, questionId);
+        useUpdateQuestions(state.questionsArray, `${correctAnswer} / ${data.length}`, questionId);
       }
     },
     [state]
@@ -240,7 +245,7 @@ const PlusMinus = () => {
                           <NumberInputField
                             id={String(question.index)}
                             name={String(question.index)}
-                            onChange={inputChangeHandler}
+                            onChange={() => inputChangeHandler}
                           />
                         </NumberInput>
                       </InputGroup>

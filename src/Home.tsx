@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useCallback, useEffect, useReducer } from 'react';
 import {
   Center,
   Heading,
@@ -14,35 +14,31 @@ import {
   Link,
 } from '@chakra-ui/react';
 import Categories from './categories';
-import { getPlusMinusIds } from '../apiClient';
+import { useGetSavedIds } from './services/idQuery';
 import { useNavigate } from 'react-router';
-import * as FirestoreService from '../apiClient';
 
-type State = Data[];
+type State = IdData[];
 
 type Action = {
   type: Categories;
-  payload: string[];
+  payload: IdData[];
 };
 
-type Data = {
+export type IdData = {
   id: string;
-  date?: string;
+  status: boolean;
+  type: Categories;
+  note: string;
+  dateCreated: Date;
 };
 
 const dataReducer = (state: State, action: Action) => {
-  const newState: State = [];
   switch (action.type) {
     case Categories.plusMinus:
       if (action.payload) {
-        action.payload.map((s: string) =>
-          newState.push({
-            id: s,
-            date: new Date(JSON.parse(s) * 1000).toLocaleString(),
-          })
-        );
+        return action.payload;
       }
-      return newState;
+      return [];
     default:
       return [];
   }
@@ -63,28 +59,16 @@ const Home = () => {
   const [state, dispatch] = useReducer(dataReducer, []);
   const navigate = useNavigate();
 
-  const getPlusMinusList = FirestoreService.getList((querySnapshot: { docs: any[] }) => {
-    const plusMinusTimeStampList = querySnapshot.docs.map(
-      (docSnapshot: { id: string }) => docSnapshot.id
-    );
-    console.log(plusMinusTimeStampList);
-    dispatch({
-      type: Categories.plusMinus,
-      payload: plusMinusTimeStampList,
-    });
-  });
-  // .then((res) => {
-  //     dispatch({
-  //     })
-  // })
-  //         const unsubscribe = FirestoreService.streamGroceryListItems(groceryListId,
-  //       (querySnapshot) => {
-  //           const updatedGroceryItems =
-  //           querySnapshot.docs.map(docSnapshot => docSnapshot.data());
-  //           setGroceryItems(updatedGroceryItems);
-  //       },
-  //       (error) => setError('grocery-list-item-get-fail')
-  //   );
+  const getPlusMinusList = useCallback(
+    () =>
+      useGetSavedIds(Categories.plusMinus).then((data: IdData[]) => {
+        dispatch({
+          type: Categories.plusMinus,
+          payload: data,
+        });
+      }),
+    []
+  );
 
   useEffect(() => {
     getPlusMinusList();
@@ -123,9 +107,9 @@ const Home = () => {
               </h2>
               <AccordionPanel pb={4}>
                 <Stack bg="purple.50">
-                  {state.map((date) => (
-                    <Link key={date.id} onClick={() => linkHandler(category.id, date.id)}>
-                      {date.date}
+                  {state.map((idData: IdData) => (
+                    <Link key={idData.id} onClick={() => linkHandler(category.id, idData.id)}>
+                      {`${idData.dateCreated} => ${idData.note}`}
                     </Link>
                   ))}
                 </Stack>
