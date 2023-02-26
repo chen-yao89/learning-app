@@ -3,15 +3,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.idList = exports.plusMinus = exports.app = void 0;
 const app_1 = require("firebase/app");
 const firestore_1 = require("firebase/firestore");
-const { FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, FIREBASE_measurementId, } = process.env;
+const { FIREBASE_APIKEY, FIREBASE_AUTHDOMAIN, FIREBASE_PROJECTID, FIREBASE_STORAGEBUCKET, FIREBASE_MESSAGINGSENDERID, FIREBASE_APPID, FIREBASE_MEASUREMENTID, } = process.env;
 const firebaseConfig = {
-    apiKey: FIREBASE_apiKey,
-    authDomain: FIREBASE_authDomain,
-    projectId: FIREBASE_projectId,
-    storageBucket: FIREBASE_storageBucket,
-    messagingSenderId: FIREBASE_messagingSenderId,
-    appId: FIREBASE_appId,
-    measurementId: FIREBASE_measurementId,
+    apiKey: FIREBASE_APIKEY,
+    authDomain: FIREBASE_AUTHDOMAIN,
+    projectId: FIREBASE_PROJECTID,
+    storageBucket: FIREBASE_STORAGEBUCKET,
+    messagingSenderId: FIREBASE_MESSAGINGSENDERID,
+    appId: FIREBASE_APPID,
+    measurementId: FIREBASE_MEASUREMENTID,
 };
 // Initialize Firebase
 exports.app = (0, app_1.initializeApp)(firebaseConfig);
