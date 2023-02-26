@@ -1,5 +1,5 @@
-import {initializeApp} from "firebase/app";
-import {collection, getFirestore} from "firebase/firestore";
+import {initializeApp} from 'firebase/app';
+import {collection, getFirestore} from 'firebase/firestore';
 const {
   FIREBASE_APIKEY,
   FIREBASE_AUTHDOMAIN,
@@ -23,5 +23,5 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export const plusMinus = collection(db, "plusMinus");
-export const idList = collection(db, "idList");
+export const plusMinus = collection(db, 'plusMinus');
+export const idList = collection(db, 'idList');

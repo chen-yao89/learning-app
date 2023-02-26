@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useReducer} from "react";
+import React, {useCallback, useEffect, useReducer} from 'react';
 import {
   Center,
   Heading,
@@ -12,10 +12,10 @@ import {
   AccordionPanel,
   AccordionIcon,
   Link,
-} from "@chakra-ui/react";
-import Categories from "./categories";
-import {useGetSavedIds} from "./services/idQuery";
-import {useNavigate} from "react-router";
+} from '@chakra-ui/react';
+import Categories from './categories';
+import {useGetSavedIds} from './services/idQuery';
+import {useNavigate} from 'react-router';
 
 type State = IdData[];
 
@@ -47,11 +47,11 @@ const dataReducer = (state: State, action: Action) => {
 const titles = [
   {
     id: Categories.plusMinus,
-    name: "+ / - review",
+    name: '+ / - review',
   },
   {
     id: Categories.fraction,
-    name: "1 / n review",
+    name: '1 / n review',
   },
 ];
 
@@ -84,7 +84,7 @@ const Home = () => {
       getPlusMinusList();
       break;
     default:
-      throw new Error("This category does not exist yet.");
+      throw new Error('This category does not exist yet.');
     }
   };
 

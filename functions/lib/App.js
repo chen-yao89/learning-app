@@ -15,8 +15,8 @@ const functions_1 = require("@firebase/functions");
 const firestore_1 = require("./services/firestore");
 const App = () => {
     const functions = (0, functions_1.getFunctions)(firestore_1.app);
-    if (process.env.REACT_APP_ENV === "development") {
-        (0, functions_1.connectFunctionsEmulator)(functions, "localhost", 5001);
+    if (process.env.REACT_APP_ENV === 'development') {
+        (0, functions_1.connectFunctionsEmulator)(functions, 'localhost', 5001);
     }
     return (react_1.default.createElement(react_2.ChakraProvider, { cssVarsRoot: undefined },
         react_1.default.createElement("img", { src: "./rainbowBg.png", style: app_1.bgImgStyle }),

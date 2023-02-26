@@ -4,7 +4,7 @@ exports.useSaveNewId = exports.useGetSavedIds = void 0;
 const firestore_1 = require("firebase/firestore");
 const firestore_2 = require("./firestore");
 const useGetSavedIds = async (type) => {
-    const getIdsQuery = (0, firestore_1.query)(firestore_2.idList, (0, firestore_1.where)("type", "==", type.toString()), (0, firestore_1.where)("status", "==", true));
+    const getIdsQuery = (0, firestore_1.query)(firestore_2.idList, (0, firestore_1.where)('type', '==', type.toString()), (0, firestore_1.where)('status', '==', true));
     const querySnapShot = await (0, firestore_1.getDocs)(getIdsQuery);
     return querySnapShot.docs.map((doc) => doc.data());
 };

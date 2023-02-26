@@ -1,30 +1,30 @@
-import React from "react";
-import {NavLink as ReachLink} from "react-router-dom";
-import Categories from "./categories";
+import React from 'react';
+import {NavLink as ReachLink} from 'react-router-dom';
+import Categories from './categories';
 
-import {Link, Button, ButtonGroup, Center} from "@chakra-ui/react";
+import {Link, Button, ButtonGroup, Center} from '@chakra-ui/react';
 
 const NavTabs = () => {
   const categories = [
     {
       key: Categories.home,
-      path: "/",
-      name: "Anthea",
+      path: '/',
+      name: 'Anthea',
       disabled: false,
     },
     {
       key: Categories.plusMinus,
-      name: "+ / -",
+      name: '+ / -',
       disabled: false,
     },
     {
       key: Categories.tenPlusAny,
-      name: "10 + N = ?",
+      name: '10 + N = ?',
       disabled: true,
     },
     {
       key: Categories.fraction,
-      name: "1 / n",
+      name: '1 / n',
       disabled: true,
     },
   ];

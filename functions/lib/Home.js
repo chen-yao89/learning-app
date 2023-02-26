@@ -45,11 +45,11 @@ const dataReducer = (state, action) => {
 const titles = [
     {
         id: categories_1.default.plusMinus,
-        name: "+ / - review",
+        name: '+ / - review',
     },
     {
         id: categories_1.default.fraction,
-        name: "1 / n review",
+        name: '1 / n review',
     },
 ];
 const Home = () => {
@@ -73,7 +73,7 @@ const Home = () => {
                 getPlusMinusList();
                 break;
             default:
-                throw new Error("This category does not exist yet.");
+                throw new Error('This category does not exist yet.');
         }
     };
     return (react_1.default.createElement(react_2.Center, null,

@@ -73,7 +73,7 @@ const updateQuestions = (state, action) => {
 };
 const PlusMinus = () => {
     const [params, setParams] = (0, react_router_dom_1.useSearchParams)();
-    const questionId = params.get("questionId");
+    const questionId = params.get('questionId');
     const generateQuestions = () => {
         if (questionId !== null) {
             return {
@@ -82,21 +82,21 @@ const PlusMinus = () => {
             };
         }
         const numberLimit = 20;
-        const operators = ["+", "-"];
+        const operators = ['+', '-'];
         const questionCounts = 10;
         const getRandomInt = (max) => Math.floor(Math.random() * (max + 1));
         const questions = [];
         for (let index = 0; index < questionCounts; index++) {
             const firstNumber = getRandomInt(numberLimit);
             const operator = operators[getRandomInt(operators.length - 1)];
-            const secondNumber = getRandomInt(operator === "-" ? firstNumber : numberLimit);
+            const secondNumber = getRandomInt(operator === '-' ? firstNumber : numberLimit);
             const questionString = `${firstNumber} ${operator} ${secondNumber}`;
             let answer = 0;
             switch (operator) {
-                case "+":
+                case '+':
                     answer = firstNumber + secondNumber;
                     break;
-                case "-":
+                case '-':
                     answer = firstNumber - secondNumber;
                     break;
                 default:
@@ -181,9 +181,9 @@ const PlusMinus = () => {
                     react_1.default.createElement(react_2.Td, null,
                         react_1.default.createElement(react_2.InputGroup, null,
                             react_1.default.createElement(react_2.InputLeftAddon, { children: "=" }),
-                            react_1.default.createElement(react_2.NumberInput, { min: 0, variant: "filled", width: "auto", value: question.userInput || "" },
+                            react_1.default.createElement(react_2.NumberInput, { min: 0, variant: "filled", width: "auto", value: question.userInput || '' },
                                 react_1.default.createElement(react_2.NumberInputField, { id: String(question.index), name: String(question.index), onChange: () => inputChangeHandler })))),
-                    react_1.default.createElement(react_2.Td, null, question.userInput === "" ||
+                    react_1.default.createElement(react_2.Td, null, question.userInput === '' ||
                         question.userInput === null ? (react_1.default.createElement(icons_1.Icon, { as: bi_1.BiRename, w: 6, h: 6, color: "teal.400" })) : question.userInput !== String(question.answer) ? (react_1.default.createElement(icons_1.Icon, { as: bi_1.BiMehAlt, w: 7, h: 7, color: "red.400" })) : (react_1.default.createElement(icons_1.Icon, { as: bi_1.BiLaugh, w: 7, h: 7, color: "pink.400" })))))))))))));
 };
 exports.default = PlusMinus;

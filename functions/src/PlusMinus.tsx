@@ -1,5 +1,5 @@
-import React, {useReducer, useEffect, useState, useCallback} from "react";
-import {BiLaugh, BiMehAlt, BiRename} from "react-icons/bi";
+import React, {useReducer, useEffect, useState, useCallback} from 'react';
+import {BiLaugh, BiMehAlt, BiRename} from 'react-icons/bi';
 import {
   Container,
   Button,
@@ -16,14 +16,14 @@ import {
   NumberInputField,
   InputGroup,
   InputLeftAddon,
-} from "@chakra-ui/react";
-import {Icon} from "@chakra-ui/icons";
+} from '@chakra-ui/react';
+import {Icon} from '@chakra-ui/icons';
 import {
   useSaveNewQuestions,
   useGetQuestions,
   useUpdateQuestions,
-} from "./services/plusMinusQuery";
-import {useSearchParams} from "react-router-dom";
+} from './services/plusMinusQuery';
+import {useSearchParams} from 'react-router-dom';
 
 type StateType =
   | {
@@ -50,9 +50,9 @@ type ActionType = {
 };
 
 enum ACTION {
-  RecordAnswer = "recordAnswer",
-  NewQuestion = "newQuestion",
-  GetExistingQuestion = "getExistingQuestion",
+  RecordAnswer = 'recordAnswer',
+  NewQuestion = 'newQuestion',
+  GetExistingQuestion = 'getExistingQuestion',
 }
 
 const updateQuestions = (state: StateType, action: ActionType): StateType => {
@@ -94,7 +94,7 @@ const updateQuestions = (state: StateType, action: ActionType): StateType => {
 
 const PlusMinus = () => {
   const [params, setParams] = useSearchParams();
-  const questionId = params.get("questionId");
+  const questionId = params.get('questionId');
 
   const generateQuestions = (): StateType => {
     if (questionId !== null) {
@@ -105,7 +105,7 @@ const PlusMinus = () => {
     }
 
     const numberLimit = 20;
-    const operators = ["+", "-"];
+    const operators = ['+', '-'];
     const questionCounts = 10;
 
     const getRandomInt = (max: number) => Math.floor(Math.random() * (max + 1));
@@ -113,15 +113,14 @@ const PlusMinus = () => {
     for (let index = 0; index < questionCounts; index++) {
       const firstNumber = getRandomInt(numberLimit);
       const operator = operators[getRandomInt(operators.length - 1)];
-      const secondNumber =
-getRandomInt(operator === "-" ? firstNumber : numberLimit);
+      const secondNumber = getRandomInt(operator === '-' ? firstNumber : numberLimit);
       const questionString = `${firstNumber} ${operator} ${secondNumber}`;
       let answer = 0;
       switch (operator) {
-      case "+":
+      case '+':
         answer = firstNumber + secondNumber;
         break;
-      case "-":
+      case '-':
         answer = firstNumber - secondNumber;
         break;
       default:
@@ -162,9 +161,7 @@ getRandomInt(operator === "-" ? firstNumber : numberLimit);
       .catch((error) => console.log(error));
   }, []);
 
-  const inputChangeHandler = (event:
-{ target: { id: number; value: string } }
-  ) => {
+  const inputChangeHandler = (event: { target: { id: number; value: string } }) => {
     const index = event.target.id;
     const userInput = event.target.value;
     // document.getElementById(index). = userInput;
@@ -247,7 +244,7 @@ getRandomInt(operator === "-" ? firstNumber : numberLimit);
                           min={0}
                           variant="filled"
                           width="auto"
-                          value={question.userInput || ""}
+                          value={question.userInput || ''}
                         >
                           <NumberInputField
                             id={String(question.index)}
@@ -258,7 +255,7 @@ getRandomInt(operator === "-" ? firstNumber : numberLimit);
                       </InputGroup>
                     </Td>
                     <Td>
-                      {question.userInput === "" ||
+                      {question.userInput === '' ||
 question.userInput === null ? (
                           <Icon as={BiRename} w={6} h={6} color="teal.400" />
                         ) : question.userInput !== String(question.answer) ? (

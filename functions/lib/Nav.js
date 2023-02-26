@@ -11,23 +11,23 @@ const NavTabs = () => {
     const categories = [
         {
             key: categories_1.default.home,
-            path: "/",
-            name: "Anthea",
+            path: '/',
+            name: 'Anthea',
             disabled: false,
         },
         {
             key: categories_1.default.plusMinus,
-            name: "+ / -",
+            name: '+ / -',
             disabled: false,
         },
         {
             key: categories_1.default.tenPlusAny,
-            name: "10 + N = ?",
+            name: '10 + N = ?',
             disabled: true,
         },
         {
             key: categories_1.default.fraction,
-            name: "1 / n",
+            name: '1 / n',
             disabled: true,
         },
     ];

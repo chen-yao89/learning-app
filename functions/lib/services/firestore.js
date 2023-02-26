@@ -16,6 +16,6 @@ const firebaseConfig = {
 // Initialize Firebase
 exports.app = (0, app_1.initializeApp)(firebaseConfig);
 const db = (0, firestore_1.getFirestore)(exports.app);
-exports.plusMinus = (0, firestore_1.collection)(db, "plusMinus");
-exports.idList = (0, firestore_1.collection)(db, "idList");
+exports.plusMinus = (0, firestore_1.collection)(db, 'plusMinus');
+exports.idList = (0, firestore_1.collection)(db, 'idList');
 //# sourceMappingURL=firestore.js.map
