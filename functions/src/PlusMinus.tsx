@@ -189,15 +189,13 @@ const PlusMinus = () => {
         data.filter((q) => String(q.answer) === q.userInput).length;
       setQuestionSaved(true);
       if (questionId === null) {
-        useSaveNewQuestions(
-          state.questionsArray, `${correctAnswer} / ${data.length}`)
+        useSaveNewQuestions(state.questionsArray, `${correctAnswer} / ${data.length}`)
           .then((id) =>
             setParams({questionId: id})
           );
       }
       if (questionId !== null) {
-        useUpdateQuestions(
-          state.questionsArray, `${correctAnswer} / ${data.length}`
+        useUpdateQuestions(state.questionsArray, `${correctAnswer} / ${data.length}`
           , questionId);
       }
     },
